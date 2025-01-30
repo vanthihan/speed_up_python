@@ -1,0 +1,7 @@
+numba
+numpy
+pandas
+setuptools
+mypy
+Cython
+taichi

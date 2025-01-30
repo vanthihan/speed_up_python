@@ -1,0 +1,529 @@
+def lcs(X, Y):
+    X, Y :: str
+    r0 :: native_int
+    r1 :: bit
+    r2 :: short_int
+    m :: int
+    r3 :: native_int
+    r4 :: bit
+    r5 :: short_int
+    n :: int
+    r6 :: list
+    r7, r8 :: int
+    r9, _ :: object
+    r10 :: native_int
+    r11 :: bit
+    r12 :: native_int
+    r13, r14, r15 :: bit
+    r16 :: list
+    r17 :: object
+    r18, r19 :: ptr
+    r20 :: int
+    r21 :: list
+    r22 :: i32
+    r23 :: bit
+    r24 :: int
+    r25 :: object
+    r26, r27, i :: int
+    r28 :: native_int
+    r29 :: bit
+    r30 :: native_int
+    r31, r32, r33 :: bit
+    r34, r35, j :: int
+    r36 :: native_int
+    r37 :: bit
+    r38 :: native_int
+    r39, r40, r41 :: bit
+    r42 :: int
+    r43 :: str
+    r44 :: int
+    r45 :: str
+    r46 :: i32
+    r47 :: bit
+    r48 :: object
+    r49, r50, r51 :: bit
+    r52 :: int
+    r53 :: object
+    r54 :: list
+    r55 :: int
+    r56 :: object
+    r57, r58 :: int
+    r59 :: object
+    r60 :: list
+    r61 :: object
+    r62 :: bit
+    r63 :: int
+    r64 :: object
+    r65 :: list
+    r66 :: object
+    r67 :: int
+    r68 :: object
+    r69 :: list
+    r70 :: int
+    r71 :: object
+    r72 :: int
+    r73 :: native_int
+    r74 :: bit
+    r75 :: native_int
+    r76, r77, r78 :: bit
+    r79 :: int
+    r80 :: object
+    r81 :: list
+    r82 :: object
+    r83 :: bit
+    r84, r85 :: int
+    r86 :: object
+    r87 :: list
+    r88 :: object
+    r89, r90 :: int
+L0:
+    r0 = CPyStr_Size_size_t(X)
+    r1 = r0 >= 0 :: signed
+    if not r1 goto L59 (error at lcs:5) else goto L1 :: bool
+L1:
+    r2 = r0 << 1
+    m = r2
+    r3 = CPyStr_Size_size_t(Y)
+    r4 = r3 >= 0 :: signed
+    if not r4 goto L60 (error at lcs:6) else goto L2 :: bool
+L2:
+    r5 = r3 << 1
+    n = r5
+    r6 = PyList_New(0)
+    if is_error(r6) goto L61 (error at lcs:7) else goto L3
+L3:
+    r7 = CPyTagged_Add(m, 2)
+    r8 = 0
+    inc_ref r8 :: int
+    r9 = box(int, r8)
+    _ = r9
+    dec_ref _
+L4:
+    r10 = r8 & 1
+    r11 = r10 != 0
+    if r11 goto L6 else goto L5 :: bool
+L5:
+    r12 = r7 & 1
+    r13 = r12 != 0
+    if r13 goto L6 else goto L7 :: bool
+L6:
+    r14 = CPyTagged_IsLt_(r8, r7)
+    if r14 goto L8 else goto L62 :: bool
+L7:
+    r15 = r8 < r7 :: signed
+    if r15 goto L8 else goto L62 :: bool
+L8:
+    r16 = PyList_New(1)
+    if is_error(r16) goto L63 (error at lcs:7) else goto L9
+L9:
+    r17 = object 0
+    r18 = get_element_ptr r16 ob_item :: PyListObject
+    r19 = load_mem r18 :: ptr*
+    inc_ref r17
+    set_mem r19, r17 :: builtins.object*
+    r20 = CPyTagged_Add(n, 2)
+    r21 = CPySequence_Multiply(r16, r20)
+    dec_ref r16
+    dec_ref r20 :: int
+    if is_error(r21) goto L63 (error at lcs:7) else goto L10
+L10:
+    r22 = PyList_Append(r6, r21)
+    dec_ref r21
+    r23 = r22 >= 0 :: signed
+    if not r23 goto L63 (error at lcs:7) else goto L11 :: bool
+L11:
+    r24 = CPyTagged_Add(r8, 2)
+    dec_ref r8 :: int
+    inc_ref r24 :: int
+    r8 = r24
+    r25 = box(int, r24)
+    _ = r25
+    dec_ref _
+    goto L4
+L12:
+    r26 = CPyTagged_Add(m, 2)
+    r27 = 2
+    inc_ref r27 :: int
+    i = r27
+L13:
+    r28 = r27 & 1
+    r29 = r28 != 0
+    if r29 goto L15 else goto L14 :: bool
+L14:
+    r30 = r26 & 1
+    r31 = r30 != 0
+    if r31 goto L15 else goto L16 :: bool
+L15:
+    r32 = CPyTagged_IsLt_(r27, r26)
+    if r32 goto L17 else goto L64 :: bool
+L16:
+    r33 = r27 < r26 :: signed
+    if r33 goto L17 else goto L64 :: bool
+L17:
+    r34 = CPyTagged_Add(n, 2)
+    r35 = 2
+    inc_ref r35 :: int
+    j = r35
+L18:
+    r36 = r35 & 1
+    r37 = r36 != 0
+    if r37 goto L20 else goto L19 :: bool
+L19:
+    r38 = r34 & 1
+    r39 = r38 != 0
+    if r39 goto L20 else goto L21 :: bool
+L20:
+    r40 = CPyTagged_IsLt_(r35, r34)
+    if r40 goto L22 else goto L65 :: bool
+L21:
+    r41 = r35 < r34 :: signed
+    if r41 goto L22 else goto L65 :: bool
+L22:
+    r42 = CPyTagged_Subtract(i, 2)
+    r43 = CPyStr_GetItem(X, r42)
+    dec_ref r42 :: int
+    if is_error(r43) goto L66 (error at lcs:11) else goto L23
+L23:
+    r44 = CPyTagged_Subtract(j, 2)
+    r45 = CPyStr_GetItem(Y, r44)
+    dec_ref r44 :: int
+    if is_error(r45) goto L67 (error at lcs:11) else goto L24
+L24:
+    r46 = PyUnicode_Compare(r43, r45)
+    dec_ref r43
+    dec_ref r45
+    r47 = r46 == -1
+    if r47 goto L25 else goto L27 :: bool
+L25:
+    r48 = PyErr_Occurred()
+    r49 = r48 != 0
+    if r49 goto L26 else goto L27 :: bool
+L26:
+    r50 = CPy_KeepPropagating()
+    if not r50 goto L66 (error at lcs:11) else goto L27 :: bool
+L27:
+    r51 = r46 == 0
+    if r51 goto L28 else goto L35 :: bool
+L28:
+    r52 = CPyTagged_Subtract(i, 2)
+    r53 = CPyList_GetItem(r6, r52)
+    dec_ref r52 :: int
+    if is_error(r53) goto L66 (error at lcs:12) else goto L29
+L29:
+    r54 = cast(list, r53)
+    if is_error(r54) goto L66 (error at lcs:12) else goto L30
+L30:
+    r55 = CPyTagged_Subtract(j, 2)
+    r56 = CPyList_GetItemBorrow(r54, r55)
+    if is_error(r56) goto L68 (error at lcs:12) else goto L31
+L31:
+    r57 = unbox(int, r56)
+    if is_error(r57) goto L68 (error at lcs:12) else goto L32
+L32:
+    r58 = CPyTagged_Add(r57, 2)
+    dec_ref r57 :: int
+    dec_ref r54
+    dec_ref r55 :: int
+    r59 = CPyList_GetItem(r6, i)
+    if is_error(r59) goto L69 (error at lcs:12) else goto L33
+L33:
+    r60 = cast(list, r59)
+    if is_error(r60) goto L69 (error at lcs:12) else goto L34
+L34:
+    r61 = box(int, r58)
+    r62 = CPyList_SetItem(r60, j, r61)
+    dec_ref r60
+    dec_ref j :: int
+    if not r62 goto L70 (error at lcs:12) else goto L52 :: bool
+L35:
+    r63 = CPyTagged_Subtract(i, 2)
+    r64 = CPyList_GetItemBorrow(r6, r63)
+    if is_error(r64) goto L71 (error at lcs:14) else goto L36
+L36:
+    r65 = borrow cast(list, r64)
+    if is_error(r65) goto L71 (error at lcs:14) else goto L37
+L37:
+    r66 = CPyList_GetItem(r65, j)
+    if is_error(r66) goto L71 (error at lcs:14) else goto L38
+L38:
+    r67 = unbox(int, r66)
+    dec_ref r66
+    if is_error(r67) goto L71 (error at lcs:14) else goto L39
+L39:
+    dec_ref r63 :: int
+    r68 = CPyList_GetItem(r6, i)
+    if is_error(r68) goto L72 (error at lcs:14) else goto L40
+L40:
+    r69 = cast(list, r68)
+    if is_error(r69) goto L72 (error at lcs:14) else goto L41
+L41:
+    r70 = CPyTagged_Subtract(j, 2)
+    r71 = CPyList_GetItem(r69, r70)
+    dec_ref r69
+    dec_ref r70 :: int
+    if is_error(r71) goto L72 (error at lcs:14) else goto L42
+L42:
+    r72 = unbox(int, r71)
+    dec_ref r71
+    if is_error(r72) goto L72 (error at lcs:14) else goto L43
+L43:
+    r73 = r72 & 1
+    r74 = r73 != 0
+    if r74 goto L45 else goto L44 :: bool
+L44:
+    r75 = r67 & 1
+    r76 = r75 != 0
+    if r76 goto L45 else goto L46 :: bool
+L45:
+    r77 = CPyTagged_IsLt_(r67, r72)
+    if r77 goto L73 else goto L74 :: bool
+L46:
+    r78 = r72 > r67 :: signed
+    if r78 goto L73 else goto L74 :: bool
+L47:
+    r79 = r72
+    goto L49
+L48:
+    r79 = r67
+L49:
+    r80 = CPyList_GetItem(r6, i)
+    if is_error(r80) goto L75 (error at lcs:14) else goto L50
+L50:
+    r81 = cast(list, r80)
+    if is_error(r81) goto L75 (error at lcs:14) else goto L51
+L51:
+    r82 = box(int, r79)
+    r83 = CPyList_SetItem(r81, j, r82)
+    dec_ref r81
+    dec_ref j :: int
+    if not r83 goto L70 (error at lcs:14) else goto L52 :: bool
+L52:
+    r84 = CPyTagged_Add(r35, 2)
+    dec_ref r35 :: int
+    inc_ref r84 :: int
+    r35 = r84
+    j = r84
+    goto L18
+L53:
+    r85 = CPyTagged_Add(r27, 2)
+    dec_ref r27 :: int
+    inc_ref r85 :: int
+    r27 = r85
+    i = r85
+    goto L13
+L54:
+    r86 = CPyList_GetItemBorrow(r6, m)
+    if is_error(r86) goto L76 (error at lcs:16) else goto L55
+L55:
+    r87 = borrow cast(list, r86)
+    if is_error(r87) goto L76 (error at lcs:16) else goto L56
+L56:
+    r88 = CPyList_GetItem(r87, n)
+    dec_ref n :: int
+    if is_error(r88) goto L77 (error at lcs:16) else goto L57
+L57:
+    r89 = unbox(int, r88)
+    dec_ref r88
+    if is_error(r89) goto L77 (error at lcs:16) else goto L58
+L58:
+    dec_ref r6
+    dec_ref m :: int
+    return r89
+L59:
+    r90 = <error> :: int
+    return r90
+L60:
+    dec_ref m :: int
+    goto L59
+L61:
+    dec_ref m :: int
+    dec_ref n :: int
+    goto L59
+L62:
+    dec_ref r7 :: int
+    dec_ref r8 :: int
+    goto L12
+L63:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    dec_ref r7 :: int
+    dec_ref r8 :: int
+    goto L59
+L64:
+    dec_ref r26 :: int
+    dec_ref r27 :: int
+    dec_ref i :: int
+    goto L54
+L65:
+    dec_ref i :: int
+    dec_ref r34 :: int
+    dec_ref r35 :: int
+    dec_ref j :: int
+    goto L53
+L66:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    dec_ref r26 :: int
+    dec_ref r27 :: int
+    dec_ref i :: int
+    dec_ref r34 :: int
+    dec_ref r35 :: int
+    dec_ref j :: int
+    goto L59
+L67:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    dec_ref r26 :: int
+    dec_ref r27 :: int
+    dec_ref i :: int
+    dec_ref r34 :: int
+    dec_ref r35 :: int
+    dec_ref j :: int
+    dec_ref r43
+    goto L59
+L68:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    dec_ref r26 :: int
+    dec_ref r27 :: int
+    dec_ref i :: int
+    dec_ref r34 :: int
+    dec_ref r35 :: int
+    dec_ref j :: int
+    dec_ref r54
+    dec_ref r55 :: int
+    goto L59
+L69:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    dec_ref r26 :: int
+    dec_ref r27 :: int
+    dec_ref i :: int
+    dec_ref r34 :: int
+    dec_ref r35 :: int
+    dec_ref j :: int
+    dec_ref r58 :: int
+    goto L59
+L70:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    dec_ref r26 :: int
+    dec_ref r27 :: int
+    dec_ref i :: int
+    dec_ref r34 :: int
+    dec_ref r35 :: int
+    goto L59
+L71:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    dec_ref r26 :: int
+    dec_ref r27 :: int
+    dec_ref i :: int
+    dec_ref r34 :: int
+    dec_ref r35 :: int
+    dec_ref j :: int
+    dec_ref r63 :: int
+    goto L59
+L72:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    dec_ref r26 :: int
+    dec_ref r27 :: int
+    dec_ref i :: int
+    dec_ref r34 :: int
+    dec_ref r35 :: int
+    dec_ref j :: int
+    dec_ref r67 :: int
+    goto L59
+L73:
+    dec_ref r67 :: int
+    goto L47
+L74:
+    dec_ref r72 :: int
+    goto L48
+L75:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    dec_ref r26 :: int
+    dec_ref r27 :: int
+    dec_ref i :: int
+    dec_ref r34 :: int
+    dec_ref r35 :: int
+    dec_ref j :: int
+    dec_ref r79 :: int
+    goto L59
+L76:
+    dec_ref m :: int
+    dec_ref n :: int
+    dec_ref r6
+    goto L59
+L77:
+    dec_ref m :: int
+    dec_ref r6
+    goto L59
+
+def __top_level__():
+    r0, r1 :: object
+    r2 :: bit
+    r3 :: str
+    r4 :: object
+    r5 :: object_ptr
+    r6 :: object_ptr[1]
+    r7 :: c_ptr
+    r8 :: native_int[1]
+    r9 :: c_ptr
+    r10 :: object
+    r11 :: dict
+    r12, r13 :: str
+    r14 :: bit
+    r15 :: object
+    r16 :: str
+    r17 :: dict
+    r18 :: object
+    r19 :: None
+L0:
+    r0 = builtins :: module
+    r1 = load_address _Py_NoneStruct
+    r2 = r0 != r1
+    if r2 goto L3 else goto L1 :: bool
+L1:
+    r3 = 'builtins'
+    r4 = PyImport_Import(r3)
+    if is_error(r4) goto L6 (error at <module>:-1) else goto L2
+L2:
+    builtins = r4 :: module
+    dec_ref r4
+L3:
+    r5 = load_address time :: module
+    r6 = [r5]
+    r7 = load_address r6
+    r8 = [1]
+    r9 = load_address r8
+    r10 = (('time', 'time', 'time'),)
+    r11 = lcs_with_mypyc.globals :: static
+    r12 = 'lcs_with_mypyc.py'
+    r13 = '<module>'
+    r14 = CPyImport_ImportMany(r10, r7, r11, r12, r13, r9)
+    if not r14 goto L6 else goto L4 :: bool
+L4:
+    r15 = ('List',)
+    r16 = 'typing'
+    r17 = lcs_with_mypyc.globals :: static
+    r18 = CPyImport_ImportFromMany(r16, r15, r15, r17)
+    if is_error(r18) goto L6 (error at <module>:2) else goto L5
+L5:
+    typing = r18 :: module
+    dec_ref r18
+    return 1
+L6:
+    r19 = <error> :: None
+    return r19
